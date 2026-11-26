@@ -27,7 +27,10 @@
                 <span class="badge text-bg-{{ $pcAsset->badge_status }}">{{ $pcAsset->status_kondisi }}</span>
             </dd>
 
-            <dt class="col-sm-4">Dibuat</dt>
+            <dt class="col-sm-4">Dibuat Oleh</dt>
+            <dd class="col-sm-8">{{ $pcAsset->creator?->name ?? 'Admin IT Support' }}</dd>
+
+            <dt class="col-sm-4">Dibuat Pada</dt>
             <dd class="col-sm-8">{{ $pcAsset->created_at?->format('d M Y H:i') }}</dd>
 
             <dt class="col-sm-4">Terakhir diubah</dt>
@@ -35,7 +38,9 @@
         </dl>
     </div>
     <div class="card-footer bg-white d-flex gap-2">
-        <a href="{{ route('pc-assets.edit', $pcAsset) }}" class="btn btn-warning">Edit</a>
+        @if (auth()->user()?->isAdmin())
+            <a href="{{ route('pc-assets.edit', $pcAsset) }}" class="btn btn-warning">Edit</a>
+        @endif
         <a href="{{ route('pc-assets.index') }}" class="btn btn-outline-secondary">Kembali</a>
     </div>
 </div>

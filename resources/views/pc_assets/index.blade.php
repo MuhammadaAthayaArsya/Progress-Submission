@@ -6,7 +6,9 @@
 <div class="card shadow-sm">
     <div class="card-header bg-white d-flex flex-wrap justify-content-between align-items-center gap-2">
         <h5 class="mb-0">Daftar Aset PC / Laptop</h5>
-        <a href="{{ route('pc-assets.create') }}" class="btn btn-primary btn-sm">+ Tambah Aset</a>
+        @if (auth()->user()?->isAdmin())
+            <a href="{{ route('pc-assets.create') }}" class="btn btn-primary btn-sm">+ Tambah Aset</a>
+        @endif
     </div>
 
     <div class="table-responsive">
@@ -37,12 +39,14 @@
                         </td>
                         <td class="text-center text-nowrap">
                             <a href="{{ route('pc-assets.show', $asset) }}" class="btn btn-info btn-sm">Detail</a>
-                            <a href="{{ route('pc-assets.edit', $asset) }}" class="btn btn-warning btn-sm">Edit</a>
-                            
-                            <button type="button" class="btn btn-danger btn-sm"
-                                    data-bs-toggle="modal" data-bs-target="#hapusModal{{ $asset->id }}">
-                                Hapus
-                            </button>
+                            @if (auth()->user()?->isAdmin())
+                                <a href="{{ route('pc-assets.edit', $asset) }}" class="btn btn-warning btn-sm">Edit</a>
+                                
+                                <button type="button" class="btn btn-danger btn-sm"
+                                        data-bs-toggle="modal" data-bs-target="#hapusModal{{ $asset->id }}">
+                                    Hapus
+                                </button>
+                            @endif
                         </td>
                     </tr>
 

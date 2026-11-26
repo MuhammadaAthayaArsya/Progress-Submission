@@ -53,6 +53,7 @@ class PcAssetController extends Controller
     {
         
         $validated = $request->validate($this->rules(), $this->messages());
+        $validated['created_by'] = $request->user()?->id;
 
         PcAsset::create($validated);   
 

@@ -23,6 +23,9 @@
 
                     <span class="navbar-text text-white ms-lg-3 me-lg-3">
                         Halo, <strong>{{ Auth::user()->name }}</strong>
+                        <span class="badge {{ Auth::user()->isAdmin() ? 'bg-warning text-dark' : 'bg-secondary' }} ms-1">
+                            {{ ucfirst(Auth::user()->role ?? 'user') }}
+                        </span>
                     </span>
 
                     {{-- Logout wajib POST + @csrf --}}

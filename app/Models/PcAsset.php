@@ -20,7 +20,13 @@ class PcAsset extends Model
         'merk_spesifikasi',
         'nomor_seri',
         'status_kondisi',
+        'created_by',
     ];
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 
     
     public const TIPE_PERANGKAT = ['PC Desktop', 'Laptop', 'All-in-One PC', 'Workstation'];
